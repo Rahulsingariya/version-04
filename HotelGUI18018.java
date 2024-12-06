@@ -8,9 +8,9 @@ class HotelGUI18018 extends JFrame {
     private Vector<Room> rooms = new Vector<>();
     private Connection connection;
 
-    // Constructor
+    
     public HotelGUI18018() {
-        // Initialize database connection
+    
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/serenity_suites", "root", "");
             initializeRooms();
@@ -18,19 +18,19 @@ class HotelGUI18018 extends JFrame {
             JOptionPane.showMessageDialog(this, "Database connection failed: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        // Set up main GUI layout
+        
         setTitle("Serenity Suites Hotel Management");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
         setLayout(new BorderLayout());
 
-        // Attractive heading for hotel name
+        
         JLabel hotelNameLabel = new JLabel("<html><span style='font-size:24px; color:blue;'>🏨 Serenity Suites Hotel 🏨</span></html>", JLabel.CENTER);
         hotelNameLabel.setFont(new Font("Serif", Font.BOLD, 28));
         hotelNameLabel.setForeground(Color.BLUE);
         add(hotelNameLabel, BorderLayout.NORTH);
 
-        // Menu Panel
+        
         JPanel menuPanel = new JPanel();
         menuPanel.setLayout(new FlowLayout());
 
@@ -46,13 +46,13 @@ class HotelGUI18018 extends JFrame {
 
         add(menuPanel, BorderLayout.NORTH);
 
-        // Main Display Panel
+        
         JTextArea displayArea = new JTextArea();
         displayArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(displayArea);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Button Actions
+        
         btnBookRoom.addActionListener(e -> bookRoom(displayArea));
         btnViewAvailableRooms.addActionListener(e -> viewAvailableRooms(displayArea));
         btnListAllRooms.addActionListener(e -> listAllRooms(displayArea));
@@ -82,14 +82,14 @@ class HotelGUI18018 extends JFrame {
         bookingDialog.setSize(400, 350);
         bookingDialog.setLayout(new GridLayout(6, 2));
 
-        // Form Inputs
+        
         JTextField txtName = new JTextField();
         JTextField txtContact = new JTextField();
         JTextField txtAddress = new JTextField();
         JTextField txtEmail = new JTextField();
         JComboBox<String> roomSelection = new JComboBox<>();
 
-        // Populate available rooms
+        
         for (Room room : rooms) {
             if (room.isAvailable()) {
                 roomSelection.addItem("Room " + room.getRoomNumber() + " (" + room.getType() + ")");
@@ -120,7 +120,7 @@ class HotelGUI18018 extends JFrame {
             String email = txtEmail.getText().trim();
             String selectedRoom = (String) roomSelection.getSelectedItem();
 
-            // Perform validations
+            
             if (!validateName(name)) {
                 JOptionPane.showMessageDialog(bookingDialog, "Invalid name. Only letters and spaces are allowed.", "Validation Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -146,7 +146,7 @@ class HotelGUI18018 extends JFrame {
                 return;
             }
 
-            // Book room
+            
             Room room = null;
             for (Room r : rooms) {
                 if (selectedRoom.contains("Room " + r.getRoomNumber())) {
